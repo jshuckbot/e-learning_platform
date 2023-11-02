@@ -13,19 +13,22 @@ SECRET_KEY = "django-insecure-$b4j@3sil01#7p(kk8-41p0j3*tmv#jonn)u=pcxd=7@xv*k5#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "0.0.0.0",
+    "127.0.0.1",
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "coursesapp.apps.CoursesappConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "coursesapp.apps.CoursesappConfig",
 ]
 
 MIDDLEWARE = [
