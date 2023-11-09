@@ -1,3 +1,4 @@
+from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms.models import modelform_factory
@@ -129,8 +130,19 @@ class ModuleContentListView(TemplateResponseMixin, View):
     template_name = "coursesapp/manage/module/content_list.html"
 
     def get(self, request, module_id):
-        # print('-' * 100)
-        # print(module_id)
         module = get_object_or_404(coursesapp_models.Module, id=module_id, course__owner=request.user)
-        # print(module.course.id, type(module.course.id))
         return self.render_to_response({"module": module})
+
+
+class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    def post(self, request):
+        for id, order in self.request_json.items():
+            coursesapp_models.Module.objects.filter(id=id, course__owner=request.user).update(order=order)
+        return self.render_json_response({"saved": "OK"})
+
+
+class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    def post(self, request):
+        for id, order in self.request_json.items():
+            coursesapp_models.Content.objects.filter(id=id, module__course__owner=request.user).update(order=order)
+        return self.render_json_response({"saved": "OK"})
