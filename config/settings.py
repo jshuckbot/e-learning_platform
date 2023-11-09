@@ -18,6 +18,7 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
+# ROOT_URLCONF = 'config.urls'
 
 # Application definition
 
