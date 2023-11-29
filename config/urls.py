@@ -12,6 +12,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("course/", include("coursesapp.urls")),
     path("", views.CourseListView.as_view(), name="course_list"),
+    path("studentsapp/", include("studentsapp.urls")),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 if settings.DEBUG:
