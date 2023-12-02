@@ -13,8 +13,9 @@ urlpatterns = [
     path("course/", include("coursesapp.urls")),
     path("", views.CourseListView.as_view(), name="course_list"),
     path("studentsapp/", include("studentsapp.urls")),
-    path("__debug__/", include("debug_toolbar.urls")),
+    path("api/", include("coursesapp.api.urls", namespace="api")),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)
