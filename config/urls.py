@@ -14,6 +14,7 @@ urlpatterns = [
     path("", views.CourseListView.as_view(), name="course_list"),
     path("studentsapp/", include("studentsapp.urls")),
     path("api/", include("coursesapp.api.urls", namespace="api")),
+    path("chatapp/", include("chatapp.urls", namespace="chatapp")),
 ]
 
 if settings.DEBUG:
